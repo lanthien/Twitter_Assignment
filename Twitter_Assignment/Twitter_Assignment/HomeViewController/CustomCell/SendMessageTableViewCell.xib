@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SendMessageTableViewCell" rowHeight="147" id="KGk-i7-Jjw" customClass="SendMessageTableViewCell" customModule="Twitter_Assignment" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="335" height="147"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="335" height="146.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r8w-WE-FfY">
+                        <rect key="frame" x="4" y="4" width="327" height="134.5"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_icon" translatesAutoresizingMaskIntoConstraints="NO" id="cq3-rg-whu">
+                                <rect key="frame" x="16" y="16" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="efw-XW-2VF"/>
+                                    <constraint firstAttribute="width" secondItem="cq3-rg-whu" secondAttribute="height" id="uXd-wl-Yn7"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BjA-PY-6lS">
+                                <rect key="frame" x="68" y="18" width="243" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="BjA-PY-6lS" secondAttribute="trailing" constant="16" id="4gJ-3N-b7X"/>
+                            <constraint firstItem="cq3-rg-whu" firstAttribute="leading" secondItem="r8w-WE-FfY" secondAttribute="leading" constant="16" id="KXD-LS-oUc"/>
+                            <constraint firstItem="BjA-PY-6lS" firstAttribute="leading" secondItem="cq3-rg-whu" secondAttribute="trailing" constant="12" id="MKR-tO-hjr"/>
+                            <constraint firstItem="cq3-rg-whu" firstAttribute="top" secondItem="r8w-WE-FfY" secondAttribute="top" constant="16" id="Pho-3e-XDE"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="cq3-rg-whu" secondAttribute="bottom" constant="12" id="Zlt-1W-hUp"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="BjA-PY-6lS" secondAttribute="bottom" constant="12" id="ekM-g3-Ja2"/>
+                            <constraint firstItem="BjA-PY-6lS" firstAttribute="top" secondItem="cq3-rg-whu" secondAttribute="top" constant="2" id="phF-j6-paM"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="r8w-WE-FfY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="4" id="SJT-bP-GBE"/>
+                    <constraint firstItem="r8w-WE-FfY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="Xp1-e3-PIa"/>
+                    <constraint firstAttribute="trailing" secondItem="r8w-WE-FfY" secondAttribute="trailing" constant="4" id="nHt-Y2-GAy"/>
+                    <constraint firstAttribute="bottom" secondItem="r8w-WE-FfY" secondAttribute="bottom" constant="8" id="sbb-jo-R0Q"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="imgvThumbnail" destination="cq3-rg-whu" id="Hg5-bj-Siz"/>
+                <outlet property="lblMessage" destination="BjA-PY-6lS" id="oMn-o7-awy"/>
+                <outlet property="vwSubContent" destination="r8w-WE-FfY" id="nA1-z4-Vlz"/>
+            </connections>
+            <point key="canvasLocation" x="295.19999999999999" y="145.27736131934034"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="user_icon" width="42.421173095703125" height="42.421173095703125"/>
+    </resources>
+</document>

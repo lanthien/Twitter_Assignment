@@ -7,7 +7,7 @@ target 'Twitter_Assignment' do
 
   # Pods for Twitter_Assignment
   pod 'TwitterKit'
-  pod 'Alamofire'
+  pod 'AESCrypt-ObjC'
 
   target 'Twitter_AssignmentTests' do
     inherit! :search_paths
