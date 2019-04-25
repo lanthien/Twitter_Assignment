@@ -1,0 +1,22 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'Twitter_Assignment' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for Twitter_Assignment
+  pod 'TwitterKit'
+  pod 'Alamofire'
+
+  target 'Twitter_AssignmentTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'Twitter_AssignmentUITests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
