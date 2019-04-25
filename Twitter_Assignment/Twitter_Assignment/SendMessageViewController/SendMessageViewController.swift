@@ -17,6 +17,7 @@ class SendMessageViewController: UIViewController {
     
     @IBOutlet weak var tvMessage:UITextView!
     @IBOutlet weak var cstBottomMessage:NSLayoutConstraint!
+    
     var notEdited = true
     weak var delegate:SendMessageDelegate?
     
@@ -50,12 +51,15 @@ class SendMessageViewController: UIViewController {
         if tvMessage.text.count > 0 {
             do {
                 let messages = try Utilities.splitMessage(tvMessage.text)
-                sendMessages(messages: messages)
-                
-//                if let delegate = delegate {
-//                    delegate.sendMessages(messages: messages)
-//                }
-//                navigationController?.popViewController(animated: true)
+                sendMessages(messages: messages, completion: {[weak self] in
+                    guard let strongSelf = self else { return }
+                    DispatchQueue.main.async {
+                        if let delegate = strongSelf.delegate {
+                            delegate.sendMessages(messages: messages)
+                        }
+                        strongSelf.navigationController?.popViewController(animated: true)
+                    }
+                })
             }
             catch SplitMessageError.NotHaveSpaceCharactor {
                 presentAlert(title: "Warning", message: "Your message have a word more than 50 characters.")
@@ -69,25 +73,35 @@ class SendMessageViewController: UIViewController {
         }
     }
     
-    private func sendMessages(messages:[String]) {
+    private func sendMessages(messages:[String], completion:@escaping ()->Void) {
         if !TwitterUtils.share.isLogined() {
             TwitterUtils.share.login { [weak self](session:TWTRSession?, error:Error?) in
-                if session == nil {
+                if let error = error {
+                    DispatchQueue.main.async {
+                        self?.presentAlert(title: "Error", message: error.localizedDescription)
+                    }
                     return
                 }
-                self?.postTweet(messages)
+                self?.postTweet(messages, completion)
             }
         }
         else {
-            self.postTweet(messages)
+            self.postTweet(messages, completion)
         }
     }
     
-    private func postTweet(_ messages:[String]) {
+    private func postTweet(_ messages:[String], _ completion:@escaping ()->Void) {
+        let group = DispatchGroup()
         for message in messages {
+            group.enter()
             TwitterUtils.share.sendTweet(message: message) { (tweet, error) in
-                print("a")
+                group.leave()
             }
+        }
+        
+        let queue = DispatchQueue(label: "PostTweet", qos: .default, attributes: .concurrent)
+        group.notify(queue: queue) {
+            completion()
         }
     }
     

@@ -16,24 +16,25 @@ class Utilities {
         }
         
         var messages = [String]()
-        var addCharCount = 4
+        var maxOrderLength = 4
         var remainString = String(message)
-        var sttArr = [String]()
+        var orderStrings = [String]()
         var index = 1
-        let sub = 50 - addCharCount
+        let numOfChar = 50 - maxOrderLength
         
+        //Check word has more than 50 characters
         let tempArr = remainString.split(separator: " ")
                                 .filter { $0.count > 50}
         if tempArr.count > 0 {
             throw SplitMessageError.NotHaveSpaceCharactor
         }
         
-        while remainString.count > sub {
-            let stt = "\(index)/\(index) "
-            sttArr.append(stt)
+        while remainString.count > numOfChar {
+            let orderStr = "\(index)/\(index) "
+            orderStrings.append(orderStr)
             
-            var newString = String(remainString[0..<50-stt.count])
-            remainString.removeString(in: 0..<50-stt.count)
+            var newString = String(remainString[0..<50-orderStr.count])
+            remainString.removeString(in: 0..<50-orderStr.count)
             var arr = newString.components(separatedBy: " ")
             arr = arr.filter { $0.count > 0 }
             if newString.last != " " && remainString.first != " " {
@@ -44,9 +45,9 @@ class Utilities {
             newString = arr.joined(separator: " ")
             messages.append(newString)
             
-            if addCharCount < stt.count {
-                addCharCount = stt.count
-                updateArr(sttArr: &sttArr, arr: &messages, remainString: &remainString)
+            if maxOrderLength < orderStr.count {
+                maxOrderLength = orderStr.count
+                updateArr(orderStrings: &orderStrings, messages: &messages, remainString: &remainString)
             }
             
             index += 1
@@ -54,29 +55,29 @@ class Utilities {
         
         //Add remain characters
         let stt = "\(index)/\(index) "
-        sttArr.append(stt)
+        orderStrings.append(stt)
         messages.append(remainString)
-        updateArr(sttArr: &sttArr, arr: &messages, remainString: &remainString)
+        updateArr(orderStrings: &orderStrings, messages: &messages, remainString: &remainString)
         
-        return joinString(stt: sttArr, messages: messages);
+        return joinString(stt: orderStrings, messages: messages);
     }
     
-    private static func updateArr(sttArr:inout [String],
-                                  arr:inout [String],
+    private static func updateArr(orderStrings:inout [String],
+                                  messages:inout [String],
                                   remainString:inout String) {
-        let count = sttArr.count
+        let count = orderStrings.count
         for index in 0..<count {
             let text = "\(index + 1)/\(count) "
-            sttArr[index] = text
+            orderStrings[index] = text
             
-            while text.count + arr[index].count > 50 {
-                guard let lastString = arr[index].components(separatedBy: " ").last
+            while text.count + messages[index].count > 50 {
+                guard let lastString = messages[index].components(separatedBy: " ").last
                     else { continue }
-                var arr1 = arr[index].components(separatedBy: " ")
-                arr1.removeLast()
-                arr[index] = arr1.joined(separator: " ")
+                var tmp = messages[index].components(separatedBy: " ")
+                tmp.removeLast()
+                messages[index] = tmp.joined(separator: " ")
                 if index < count - 2 {
-                    arr[index+1].insert(contentsOf: "\(lastString) ", at: arr[index+1].startIndex)
+                    messages[index+1].insert(contentsOf: "\(lastString) ", at: messages[index+1].startIndex)
                 }
                 else {
                     remainString.insert(contentsOf: "\(lastString) ", at: remainString.startIndex)

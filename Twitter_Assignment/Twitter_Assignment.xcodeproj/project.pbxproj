@@ -130,6 +130,8 @@
 		8F20F13B2270B40A00919A4B /* Twitter_Assignment */ = {
 			isa = PBXGroup;
 			children = (
+				8FD1F707227171490069A4D5 /* Extension */,
+				8FD1F7082271715F0069A4D5 /* Utils */,
 				8FD1F70F22718B700069A4D5 /* HomeViewController */,
 				8FD1F71022718B8E0069A4D5 /* SendMessageViewController */,
 				8F20F13C2270B40A00919A4B /* AppDelegate.swift */,
@@ -137,8 +139,6 @@
 				8F20F1432270B40B00919A4B /* Assets.xcassets */,
 				8F20F1452270B40B00919A4B /* LaunchScreen.storyboard */,
 				8F20F1482270B40B00919A4B /* Info.plist */,
-				8FD1F707227171490069A4D5 /* Extension */,
-				8FD1F7082271715F0069A4D5 /* Utils */,
 			);
 			path = Twitter_Assignment;
 			sourceTree = "<group>";
@@ -668,6 +668,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LF52MC8FJF;
 				INFOPLIST_FILE = Twitter_Assignment/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -686,6 +687,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LF52MC8FJF;
 				INFOPLIST_FILE = Twitter_Assignment/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
