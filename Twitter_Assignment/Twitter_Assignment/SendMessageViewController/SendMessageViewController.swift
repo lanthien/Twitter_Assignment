@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TwitterKit
 
 protocol SendMessageDelegate:class {
     func sendMessages(messages:[String])
@@ -49,10 +50,12 @@ class SendMessageViewController: UIViewController {
         if tvMessage.text.count > 0 {
             do {
                 let messages = try Utilities.splitMessage(tvMessage.text)
-                if let delegate = delegate {
-                    delegate.sendMessages(messages: messages)
-                }
-                navigationController?.popViewController(animated: true)
+                sendMessages(messages: messages)
+                
+//                if let delegate = delegate {
+//                    delegate.sendMessages(messages: messages)
+//                }
+//                navigationController?.popViewController(animated: true)
             }
             catch SplitMessageError.NotHaveSpaceCharactor {
                 presentAlert(title: "Warning", message: "Your message have a word more than 50 characters.")
@@ -63,6 +66,28 @@ class SendMessageViewController: UIViewController {
         }
         else {
             presentAlert(title: "Warning", message: "Your message is empty.")
+        }
+    }
+    
+    private func sendMessages(messages:[String]) {
+        if !TwitterUtils.share.isLogined() {
+            TwitterUtils.share.login { [weak self](session:TWTRSession?, error:Error?) in
+                if session == nil {
+                    return
+                }
+                self?.postTweet(messages)
+            }
+        }
+        else {
+            self.postTweet(messages)
+        }
+    }
+    
+    private func postTweet(_ messages:[String]) {
+        for message in messages {
+            TwitterUtils.share.sendTweet(message: message) { (tweet, error) in
+                print("a")
+            }
         }
     }
     
