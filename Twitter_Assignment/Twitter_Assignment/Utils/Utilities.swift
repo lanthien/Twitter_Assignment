@@ -17,7 +17,12 @@ class Utilities {
         
         var messages = [String]()
         var maxOrderLength = 4
-        var remainString = String(message)
+        
+        //Encode String to Unicode
+        let dataenc = message.data(using: String.Encoding.nonLossyASCII)
+        guard var remainString = String(data: dataenc!, encoding: String.Encoding.utf8)
+            else { return [message] }
+        
         var orderStrings = [String]()
         var index = 1
         let numOfChar = 50 - maxOrderLength
@@ -94,9 +99,12 @@ class Utilities {
             if (index < stt.count) {
                 string.insert(contentsOf: stt[index], at: string.startIndex)
             }
-            result.append(string)
+            
+            if let data = string.data(using: .utf8),
+                let message = String(data: data, encoding: .nonLossyASCII){
+                result.append(message)
+            }
         }
-        
         print(result)
         return result
     }
